@@ -13,12 +13,14 @@ trait HasPermalinks
 
     public abstract function getPermalinkDate(): string;
 
-    public function generatePermalink(string $syntax)
+    public abstract function getPermalinkId(): int|string;
+
+    public function generatePermalink(string $syntax): string
     {
         if (!($this instanceof Model)) {
             throw new \TypeError('Target class "' . static::class . '" must be an instance of "Illuminate\Database\Eloquent\Model".');
         }
-        
+
         return $this->getPermalinkGenerator()->generate($this, $syntax);
     }
 }

@@ -19,6 +19,13 @@
       "Latus\\Permalink\\": "src/"
     }
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Latus\\Permalink\\Providers\\PermalinkServiceProvider"
+      ]
+    }
+  },
   "repositories": [
     {
       "type": "composer",

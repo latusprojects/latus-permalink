@@ -3,6 +3,7 @@
 namespace Latus\Permalink\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Latus\Permalink\Models\Permalink;
 use Latus\Repositories\EloquentRepository;
 use Latus\Permalink\Repositories\Contracts\PermalinkRepository as PermalinkRepositoryContract;
@@ -29,5 +30,10 @@ class PermalinkRepository extends EloquentRepository implements PermalinkReposit
     public function relatedModel(): Model
     {
         return new Permalink();
+    }
+
+    public function getAllByModel(Model $model): Collection
+    {
+        return $this->relatedModel()->where('related_model_class', get_class($model))->where('related_model_id', $model->id)->get();
     }
 }

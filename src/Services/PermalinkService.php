@@ -3,6 +3,7 @@
 namespace Latus\Permalink\Services;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Latus\Permalink\Models\Permalink;
 use Latus\Permalink\Repositories\Contracts\PermalinkRepository;
@@ -52,5 +53,10 @@ class PermalinkService
     public function setUrlOfPermalink(Permalink $permalink, string $url)
     {
         $this->permalinkRepository->setUrl($permalink, $url);
+    }
+
+    public function getAllByModel(Model $model): Collection
+    {
+        return $this->permalinkRepository->getAllByModel($model);
     }
 }

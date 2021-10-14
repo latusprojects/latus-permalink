@@ -18,7 +18,7 @@ class CreatePermalinksTable extends Migration
             $table->foreignId('related_model_id');
             $table->string('related_model_class');
             $table->timestamps();
-            $table->string('url');
+            $table->string('url')->unique();
             $table->string('target_url')->nullable();
         });
     }

@@ -13,15 +13,17 @@ class PermalinkGenerator implements Contracts\PermalinkGenerator
         $permalink = $syntax;
 
         if (method_exists($model, 'getPermalinkName')) {
-            $permalink = Str::replaceArray('{{name}}', $model->getPermalinkName(), $permalink);
+            $permalink = Str::replace('{{name}}',
+                    urlencode(Str::replace(' ', '-', preg_replace('/[^A-Za-z0-9\-]/', '', $model->getPermalinkName()))),
+                $permalink);
         }
 
         if (method_exists($model, 'getPermalinkDate')) {
-            $permalink = Str::replaceArray('{{date}}', $model->getPermalinkDate(), $permalink);
+            $permalink = Str::replace('{{date}}', $model->getPermalinkDate(), $permalink);
         }
 
         if (method_exists($model, 'getPermalinkId')) {
-            $permalink = Str::replaceArray('{{id}}', $model->getPermalinkId(), $permalink);
+            $permalink = Str::replace('{{id}}', $model->getPermalinkId(), $permalink);
         }
 
         return $permalink;

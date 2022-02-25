@@ -26,10 +26,25 @@ class GeneratedPermalinkRepository implements \Latus\Permalink\Repositories\Cont
         app(SettingSeeder::class)->run();
         GeneratesPermalinks::dispatch();
 
+        $this->putPermalinksIntoCache();
+    }
+
+    protected function putPermalinksIntoCache()
+    {
         $fileContents = "<?php \n" .
             "return " . var_export(self::$generatedPermalinks, true) . ";";
-        
+
         File::put(base_path('bootstrap/cache/permalinks.php'), $fileContents);
+    }
+
+    public function attachCachablePermalink(string $url, string $modelClass, int $modelId, string $targetUrl)
+    {
+        self::$generatedPermalinks[$url] =
+            [
+                'model_class' => $modelClass,
+                'model_id' => $modelId,
+                'target_url' => $targetUrl,
+            ];
     }
 
     public function generatePermalinkFor(Model $model)

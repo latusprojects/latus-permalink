@@ -25,16 +25,7 @@
       "providers": [
         "Latus\\Permalink\\Providers\\PermalinkServiceProvider"
       ]
-    },
-    "branch-alias": {
-      "dev-develop": "0.1.x-dev"
     }
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://latusprojects.repo.repman.io"
-    }
-  ],
   "minimum-stability": "dev"
 }
